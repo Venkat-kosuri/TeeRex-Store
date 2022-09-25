@@ -51,7 +51,7 @@ const Header = () => {
             TeeRex Store
           </NavLink>
           <Nav>
-            <NavLink to="/" className="text-decoration-none text-dark me-3">
+            <NavLink to="/cart" className="text-decoration-none text-dark me-3">
               Products
             </NavLink>
             <Badge

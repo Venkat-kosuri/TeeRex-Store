@@ -35,7 +35,7 @@
   .rating{
       background-color: green;
   }
-  
+
   @media screen and (max-width:772px){
       .iteamsdetails{
           flex-direction: column;
@@ -66,4 +66,8 @@
       .iteamsdetails{
         padding: 0px;
     }
+    .card_style {
+        width: -webkit-fill-available !important;
+    }
+
   }

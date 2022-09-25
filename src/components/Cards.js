@@ -90,8 +90,8 @@ const Cards = () => {
               </InputGroup>
             </div>
             {error && <h4 className="text-center text-warning"> {error} </h4>}
-            <div className="d-md-flex">
-              <div className="col-md-3 mt-3">
+            <div className="d-md-flex ">
+              <div className="col-md-3 mt-3 ">
                 <div className="d-block">
                   <p className="me-2">Gender</p>
                   <Button
