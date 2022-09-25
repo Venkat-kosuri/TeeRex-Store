@@ -4,7 +4,8 @@ import axios from "axios";
 import ProductCard from "../helper/ProductCard";
 import { BiSearch } from "react-icons/bi";
 import SearchFilter from "react-filter-search";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
+import { InputGroup, FormControl, Button, Dropdown } from "react-bootstrap";
+
 const Cards = () => {
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -26,14 +27,14 @@ const Cards = () => {
       return curData.gender === catitem;
     });
     setProductsInfo(result);
-    // console.log("gender", result);
+    console.log("gender", result);
   };
   const filterColor = (catitem) => {
     const result = data.filter((curData) => {
       return curData.color === catitem;
     });
     setProductsInfo(result);
-    // console.log("color", result);
+    console.log("color", result);
   };
 
   const filterCoat = (catitem) => {
@@ -41,21 +42,21 @@ const Cards = () => {
       return curData.type === catitem;
     });
     setProductsInfo(result);
-    // console.log("coat", result);
+    console.log("coat", result);
   };
   const filterPrice = (catitem) => {
     const result = data.filter((curData) => {
       return curData.price === catitem;
     });
     setProductsInfo(result);
-    // console.log("coat", result);
+    console.log("coat", result);
   };
 
   const filterPrices = (catitem) => {
     if (catitem) {
       const filteredData = data.filter((item) => item.price <= 450);
       setProductsInfo(filteredData);
-      // console.log("price 251 to 450", filteredData);
+      console.log("price 251 to 450", filteredData);
     } else {
       console.log("error");
     }
@@ -77,21 +78,133 @@ const Cards = () => {
         <div className="container mt-3">
           <div className="row">
             <div className="col-md-4 mb-3 mx-auto text-center">
-              <InputGroup className="">
-                <FormControl
-                  placeholder="Search For Products"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  className="bg-light text-black"
-                />
-                <InputGroup.Text className="bg-light text-dark-primary">
-                  <BiSearch size="2rem" className="text-dark" />
-                </InputGroup.Text>
-              </InputGroup>
+              <div className="d-flex justify-content-around">
+                <div className="me-2">
+                  <InputGroup className="">
+                    <FormControl
+                      placeholder="Search For Products"
+                      value={searchInput}
+                      onChange={(e) => setSearchInput(e.target.value)}
+                      className="bg-light text-black"
+                    />
+                    <InputGroup.Text className="bg-light text-dark-primary">
+                      <BiSearch size="2rem" className="text-dark" />
+                    </InputGroup.Text>
+                  </InputGroup>
+                </div>
+                <div className="d-md-none d-sm-block  mt-1">
+                  <Dropdown className="ma-3">
+                    <Dropdown.Toggle
+                      variant="dark"
+                      id="dropdown-basic"
+                    ></Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item>
+                        <div className="d-block">
+                          <p className="me-2">Gender</p>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterGender("Men")}
+                            className="me-3"
+                          >
+                            Men
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterGender("Women")}
+                          >
+                            Women
+                          </Button>
+                        </div>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <div className="d-block ">
+                          <p className="me-2">Color</p>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterColor("Blue")}
+                            className="me-3"
+                          >
+                            Blue
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterColor("Red")}
+                            className="me-3"
+                          >
+                            Red
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterColor("Green")}
+                            className="me-3"
+                          >
+                            Green
+                          </Button>
+                        </div>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <div className="d-block ">
+                          <p className="me-2">Price</p>
+
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterPrice(250)}
+                            className="me-3"
+                          >
+                            0-Rs250
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterPrices(500)}
+                            className="me-3"
+                          >
+                            Rs251-450
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterEnd(450)}
+                            className="me-3"
+                          >
+                            450
+                          </Button>
+                        </div>
+                      </Dropdown.Item>
+                      <Dropdown.Item>
+                        <div className="d-block ">
+                          <p className="me-2">Type</p>
+
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterCoat("Polo")}
+                            className="me-3"
+                          >
+                            Polo
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterCoat("Hoodie")}
+                            className="me-3"
+                          >
+                            Hoodie
+                          </Button>
+                          <Button
+                            variant="btn btn-outline-secondary"
+                            onClick={() => filterCoat("Basic")}
+                            className="me-3"
+                          >
+                            Basic
+                          </Button>
+                        </div>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+              </div>
             </div>
             {error && <h4 className="text-center text-warning"> {error} </h4>}
-            <div className="d-md-flex ">
-              <div className="col-md-3 mt-3 ">
+            <div className="d-md-flex">
+              <div className="d-none d-md-block col-md-3 mt-3 ">
                 <div className="d-block">
                   <p className="me-2">Gender</p>
                   <Button
@@ -183,6 +296,7 @@ const Cards = () => {
                   </Button>
                 </div>
               </div>
+
               <div className="col-md-9">
                 <SearchFilter
                   value={searchInput}
